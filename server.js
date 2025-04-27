@@ -63,6 +63,17 @@ app.post("/api/save", async (req, res) => {
 
 // Start Server
 
+app.get("/api/get", (req, res) => {
+  Coordinate.find()
+    .then((coordinates) => {
+      res.status(200).json(coordinates);
+    })
+    .catch((error) => {
+      console.error("Error fetching coordinates:", error);
+      res.status(500).json({ message: "Server Error" });
+    });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
